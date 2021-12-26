@@ -3,11 +3,11 @@ name = "gen"
 version = "0.1.0"
 authors = ["Ethan Brown <ewb@ewb.io>"]
 edition = "2018"
+resolver = "2"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-nannou = "0.14"
-nannou_audio = "0.14"
-ndarray = "0.13"
-rand = "0.7"
+nannou = "0.18"
+ndarray = "0.15"
+rand = "0.8"
