@@ -8,9 +8,9 @@ const WINDOW_X: u32 = 1000;
 const WINDOW_Y: u32 = 1000;
 const SPIN_WIDTH_X: u32 = 1;
 const SPIN_WIDTH_Y: u32 = 1;
-const BETA_START: f32 = 0.5 * 0.440686793509772;
-const BETA_END: f32 = 1.1 * 0.440686793509772; // (2.).sqrt().ln_1p() / 2.;
-const N_STEPS: u32 = 1000;
+const BETA_START: f32 = 0.1 * 0.440686793509772;
+const BETA_END: f32 = 1.0 * 0.440686793509772; // (2.).sqrt().ln_1p() / 2.;
+const N_STEPS: u32 = 100;
 
 struct Model {
     _window: window::Id,
@@ -91,6 +91,11 @@ fn update(_app: &App, _model: &mut Model, _update: Update) {
         if _model.rng.gen::<f32>() < (beta * (old_energy - new_energy) as f32).exp() {
             _model.a[[i, j]] *= -1;
         }
+    }
+
+    // increment beta
+    if _model.beta > BETA_END || _model.beta < BETA_START {
+        _model.beta_delta *= -1.;
     }
     _model.beta += _model.beta_delta;
     println!("beta {}", _model.beta);
